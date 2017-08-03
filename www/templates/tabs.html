@@ -3,22 +3,88 @@ Create tabs with an icon and label, using the tabs-positive style.
 Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
-<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+ <ion-tabs class="tabs-icon-top tabs-color-active-positive">
 
-  <!-- Dashboard Tab -->
-  <ion-tab title="Status" icon-off="ion-ios-pulse" icon-on="ion-ios-pulse-strong" href="#/tab/dash">
+  <!-- Home Tab -->
+  <ion-tab title="Home" icon-off="ion-home" icon-on="ion-home" href="#/tab/dash">
     <ion-nav-view name="tab-dash"></ion-nav-view>
   </ion-tab>
 
-  <!-- Chats Tab -->
-  <ion-tab title="Chats" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/tab/chats">
+
+  <!-- Login Tab -->
+  <ion-tab class="space" title="Login" icon-off="ion-power" icon-on="ion-power" ng-click="duty()">
     <ion-nav-view name="tab-chats"></ion-nav-view>
   </ion-tab>
 
-  <!-- Account Tab -->
-  <ion-tab title="Account" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/account">
-    <ion-nav-view name="tab-account"></ion-nav-view>
+
+  <!-- Call Icon -->
+  <ion-tab class="call" icon-off="ion-ios-telephone" icon-on="ion-ios-telephone" ng-click="detail()">
+    <ion-nav-view name="tab-chats"></ion-nav-view>
+  </ion-tab>
+
+  <!-- NTV Tab -->
+  <ion-tab title="NTV" icon-off="ion-ios-paper" icon-on="ion-ios-paper" ng-click="ntv()">
+    <ion-nav-view name="tab-neartovisit"></ion-nav-view>
   </ion-tab>
 
 
-</ion-tabs>
+  <!-- Cancel Tab -->
+  <ion-tab title="Cancel" icon-off="ion-ios-contact" icon-on="ion-ios-contact"  ng-click="cancel()">
+    <ion-nav-view name="tab-cancel"></ion-nav-view>
+  </ion-tab>
+
+
+    <ion-tab class="dis-none" title="duty" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/duty">
+      <ion-nav-view name="tab-duty"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab class="dis-none" title="detail" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/detail">
+      <ion-nav-view name="tab-detail"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab class="dis-none" title="detail-action" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/detail-action">
+      <ion-nav-view name="tab-detail-action"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab class="dis-none" title="followup" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/followup">
+      <ion-nav-view name="tab-followup"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab class="dis-none" title="visit" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/visit">
+      <ion-nav-view name="tab-visit"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab class="dis-none" title="edit" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/edit">
+      <ion-nav-view name="tab-edit"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab class="dis-none" title="report" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/report">
+      <ion-nav-view name="tab-report"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab class="dis-none" title="search" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/search">
+      <ion-nav-view name="tab-search"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab class="dis-none" title="createlead" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/createlead">
+      <ion-nav-view name="tab-createlead"></ion-nav-view>
+    </ion-tab>
+
+    <ion-tab class="dis-none" title="createticket" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/createticket">
+      <ion-nav-view name="tab-createticket"></ion-nav-view>
+    </ion-tab>
+    
+    <ion-tab class="dis-none" title="neartovisit" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/neartovisit">
+      <ion-nav-view name="tab-neartovisit"></ion-nav-view>
+    </ion-tab>
+    
+    <ion-tab class="dis-none" title="cancel" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/cancel">
+      <ion-nav-view name="tab-cancel"></ion-nav-view>
+    </ion-tab>
+    
+    <ion-tab class="dis-none" title="addfollowuppage" icon-off="ion-ios7-gear-outline" icon-on="ion-ios7-gear" href="#/tab/addfollowuppage">
+      <ion-nav-view name="tab-addfollowuppage"></ion-nav-view>
+    </ion-tab>
+    
+
+ </ion-tabs>

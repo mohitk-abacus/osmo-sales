@@ -5689,6 +5689,64 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
     .loading-container .loading h1, .loading-container .loading h2, .loading-container .loading h3, .loading-container .loading h4, .loading-container .loading h5, .loading-container .loading h6 {
       color: #fff; }
 
+    .ion-loading-d {
+       display: inline-block;
+       font-family: "Ionicons";
+       speak: none;
+       font-style: normal;
+       font-weight: normal;
+       font-variant: normal;
+       text-transform: none;
+       text-rendering: auto;
+       line-height: 1;
+       -webkit-font-smoothing: antialiased;
+       -moz-osx-font-smoothing: grayscale;
+
+       -webkit-animation: spin 1s infinite linear;
+       -moz-animation: spin 1s infinite linear;
+       -o-animation: spin 1s infinite linear;
+       animation: spin 1s infinite linear;
+    }
+
+    .ion-loading-d:before {
+      content: "\f29d"; 
+    }
+
+    @-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg); }
+
+  100% {
+    -moz-transform: rotate(359deg); } }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg); }
+
+  100% {
+    -webkit-transform: rotate(359deg); } }
+
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg); }
+
+  100% {
+    -o-transform: rotate(359deg); } }
+
+@-ms-keyframes spin {
+  0% {
+    -ms-transform: rotate(0deg); }
+
+  100% {
+    -ms-transform: rotate(359deg); } }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+
+  100% {
+    transform: rotate(359deg); } }
+
 /**
  * Items
  * --------------------------------------------------

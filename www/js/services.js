@@ -1,50 +1,82 @@
-angular.module('starter.services', [])
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
+ angular.module('starter.services', [])
 
-  // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
-  }, {
-    id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
-  }, {
-    id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
-  }, {
-    id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
-  }];
+  .service('LoginService', function($q, $http) {
 
-  return {
-    all: function() {
-      return chats;
-    },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+    return {
+        loginUser: function(name, pw) {
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+
+            $http.post(server_url+"/get_telecaller.php", {
+
+             'username':name,
+             'password':pw })
+
+                .then(function (response) {
+                    if (response.data.error.code === "000") {
+                        console.log("User login successful: " + JSON.stringify(response.data));
+                        deferred.resolve(response.data);
+                    } else {
+                        console.log("User login failed: " + JSON.stringify(response.data.error));
+                        deferred.reject(response.data);
+                    }
+                }, function (error) {
+                    console.log("Server Error on login: " + JSON.stringify(error));
+                    deferred.reject(error);
+                });
+
+            promise.success = function (fn) {
+                promise.then(fn);
+                return promise;
+            };
+            promise.error = function (fn) {
+                promise.then(null, fn);
+                return promise;
+            };
+
+            return promise; 
+        },
+        sqliteloginUser: function(id) {
+            var deferred = $q.defer();
+            var promise = deferred.promise;
+
+            $http.post(server_url+"/get_telecaller.php", {
+
+             'telecaller_id':id})
+
+                .then(function (response) {
+                    if (response.data.error.code === "000") {
+                        console.log("User login successful: " + JSON.stringify(response.data));
+                        deferred.resolve(response.data);
+                    } else {
+                        console.log("User login failed: " + JSON.stringify(response.data.error));
+                        deferred.reject(response.data);
+                    }
+                }, function (error) {
+                    console.log("Server Error on login: " + JSON.stringify(error));
+                    deferred.reject(error);
+                });
+
+            promise.success = function (fn) {
+                promise.then(fn);
+                return promise;
+            };
+            promise.error = function (fn) {
+                promise.then(null, fn);
+                return promise;
+            };
+
+            return promise; 
         }
-      }
-      return null;
     }
-  };
-});
+  })
+
+
+  .service('DashService', function($q, $http) {
+
+    
+  })
+
+   
+ 

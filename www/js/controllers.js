@@ -1,28 +1,86 @@
-angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+   var db = null;
+   angular.module('starter.controllers', ["ionic", "ion-datetime-picker"])
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
+  .controller('LoginCtrl', function($scope, $rootScope, LoginService, $ionicPopup, $ionicLoading, $state, $cordovaSQLite, $timeout) {
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
-})
+      $scope.data = {};
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+      $scope.login = function () {
 
-.controller('AccountCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-});
+        $ionicLoading.show({
+              template: '<span class="icon spin ion-loading-d"></span> Loading...'
+        });
+
+        LoginService.loginUser($scope.data.username, $scope.data.password)
+        .then(function (result) {
+
+            var query = "INSERT INTO "+dbTableName+" (telecaller_id) VALUES (?)";
+            $cordovaSQLite.execute(db, query, [result.userData.id]).then(function(resultData) {
+               telecaller_id = result.userData.id;
+               dbVersion = result.userData.app_upgrade_version;
+               $rootScope.loginData.on_duty = result.userData.on_duty;
+               $timeout(function () { $ionicLoading.hide(); }, 800);
+               $state.go('tab.dash');
+            }, function (err) {
+               $ionicLoading.hide();
+               console.error(err);
+            });
+        }, function (resultData) {
+             $ionicLoading.hide();
+             var alertPopup = $ionicPopup.alert({
+                title: 'Login failed!',
+                template: 'Please check your credentials!'
+            });
+        });
+     };
+  })
+
+
+  .controller('DashCtrl', function($scope, $rootScope, DashService, $state, $ionicPopup, $ionicLoading, $timeout,$ionicPlatform, $window,$cordovaAppVersion, $cordovaToast) { 
+
+      /*$cordovaAppVersion.getVersionNumber()
+        .then(function (version) {
+
+              if(!appVersion) {
+                appVersion = version;
+                
+                if(dbVersion!==appVersion)
+                {
+                    versionerr(dbVersion,appVersion);
+                    $ionicPlatform.registerBackButtonAction(function(e) {
+                        //This will restrict the user to close the popup by pressing back key
+                         e.preventDefault();
+                    },401);
+                };
+              }
+      }); 
+
+     versionerr = function(newv,oldv) {
+
+      var myPopup = $ionicPopup.show({
+        title: "Update Available",
+        template: "A newer version("+newv+") of this app is available for download. Please update it from PlayStore ! ",
+        subTitle: 'current version : '+oldv,
+        buttons: [{ 
+            text: 'Exit',
+            type: 'button-dark',
+            onTap: function(e) {     
+                ionic.Platform.exitApp();
+            }
+        }, {
+            text: '<b>Update</b>',
+            type: 'button-positive',
+            onTap: function(e) {
+
+              $window.open("https://play.google.com/store/apps/details?id=com.osmo.telecaller", '_system');
+              ionic.Platform.exitApp();
+            }  
+          }]
+        });
+      }
+   */
+  })
+
+
+  
